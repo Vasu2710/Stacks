@@ -1,54 +1,56 @@
 /*
-    Stack implementation using array
-*/
+*   Stack implementation using arrays
+ */
+class Stack{
+    private int arr[];
+    int top, currSize, maxSize;
 
-class StackImplUsingArr {
-    int topIdx= -1;
-    int currSize = 0;
-    int[] stack = new int[10];
-    
-    //functions
-    void pop(){
-        if(topIdx == -1){
-            System.out.println("Stack is already empty!!");
-            return;
-        }
-        topIdx--;
-        currSize--;
-        return;
+    public Stack(){
+        arr = new int[16];
+        top = -1;
+        currSize = 0;
     }
-    void push(int n){
-        if(currSize == 10){
-            System.out.println("Stack is already full!!");
-            return;
+    public Stack(int maxSize){
+        this.maxSize = maxSize;
+        arr = new int[maxSize];
+        top = -1;
+        currSize = 0;
+    }
+    public void push(int n){
+        if(currSize == maxSize){
+            System.out.println("Stack is full\nExiting...");
+            System.exit(1);
         }
-        topIdx++;
+        top++;
+        arr[top] = n;
         currSize++;
-        stack[topIdx] = n;
-        return;
+        System.out.println("The element pushed is " + n);
     }
-    int top(){
-        if(topIdx == -1){
-            System.out.println("Stack is empty. Returning -1");
-            return -1;
+    public int pop(){
+        if(top == -1){
+            System.out.println("Stack Empty\nExiting...");
+            System.exit(1);
         }
-        return stack[topIdx];
+        int popped = arr[top];
+        top--;
+        currSize--;
+        return popped;
     }
-    int size(){
+    public int top(){
+        if(top == -1){
+            System.out.println("Stack Empty\nExiting...");
+            System.exit(1);
+        }
+        return arr[top];
+    }
+    public int size(){
         return currSize;
     }
-    boolean isEmpty(){
-        return topIdx == -1;
-    }
-    boolean isFull(){
-        return currSize == 10;
-    }
-    public static void main(String[] args) {
-       StackImplUsingArr stack  = new StackImplUsingArr();
-       stack.push(10);
-       System.out.println(stack.top());
-       stack.pop();
-       stack.pop();
-       System.out.println(stack.size());
+}
+class StackImplUsingArr{
+    public static void main(String args[]){
+        Stack s = new Stack(6);
+        
+
     }
 }
